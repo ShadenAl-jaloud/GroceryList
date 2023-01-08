@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84108173296AB60E00724A0B /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84108172296AB60E00724A0B /* SignUp.swift */; };
+		84108175296ABB5600724A0B /* GroceryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84108174296ABB5600724A0B /* GroceryList.swift */; };
+		84108177296ABB9D00724A0B /* GroceryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84108176296ABB9D00724A0B /* GroceryCell.swift */; };
+		84108179296AC4E900724A0B /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84108178296AC4E900724A0B /* MemberCell.swift */; };
+		8410817B296AC50F00724A0B /* OnlineMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410817A296AC50F00724A0B /* OnlineMember.swift */; };
 		84AD1BEF296AA33E0002BA04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AD1BEE296AA33E0002BA04 /* AppDelegate.swift */; };
 		84AD1BF1296AA33E0002BA04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AD1BF0296AA33E0002BA04 /* SceneDelegate.swift */; };
 		84AD1BF3296AA33E0002BA04 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AD1BF2296AA33E0002BA04 /* ViewController.swift */; };
@@ -16,6 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84108172296AB60E00724A0B /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		84108174296ABB5600724A0B /* GroceryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryList.swift; sourceTree = "<group>"; };
+		84108176296ABB9D00724A0B /* GroceryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCell.swift; sourceTree = "<group>"; };
+		84108178296AC4E900724A0B /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		8410817A296AC50F00724A0B /* OnlineMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineMember.swift; sourceTree = "<group>"; };
 		84AD1BEB296AA33E0002BA04 /* GroceryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AD1BEE296AA33E0002BA04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AD1BF0296AA33E0002BA04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +47,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84108171296AB5E400724A0B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84108172296AB60E00724A0B /* SignUp.swift */,
+				84108174296ABB5600724A0B /* GroceryList.swift */,
+				84108176296ABB9D00724A0B /* GroceryCell.swift */,
+				84108178296AC4E900724A0B /* MemberCell.swift */,
+				8410817A296AC50F00724A0B /* OnlineMember.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		84AD1BE2296AA33D0002BA04 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +78,7 @@
 		84AD1BED296AA33E0002BA04 /* GroceryList */ = {
 			isa = PBXGroup;
 			children = (
+				84108171296AB5E400724A0B /* Controller */,
 				84AD1BEE296AA33E0002BA04 /* AppDelegate.swift */,
 				84AD1BF0296AA33E0002BA04 /* SceneDelegate.swift */,
 				84AD1BF2296AA33E0002BA04 /* ViewController.swift */,
@@ -139,6 +162,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AD1BF3296AA33E0002BA04 /* ViewController.swift in Sources */,
+				84108179296AC4E900724A0B /* MemberCell.swift in Sources */,
+				8410817B296AC50F00724A0B /* OnlineMember.swift in Sources */,
+				84108177296ABB9D00724A0B /* GroceryCell.swift in Sources */,
+				84108173296AB60E00724A0B /* SignUp.swift in Sources */,
+				84108175296ABB5600724A0B /* GroceryList.swift in Sources */,
 				84AD1BEF296AA33E0002BA04 /* AppDelegate.swift in Sources */,
 				84AD1BF1296AA33E0002BA04 /* SceneDelegate.swift in Sources */,
 			);
