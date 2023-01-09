@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -13,10 +14,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var GoogleButton: UIButton!
     @IBOutlet weak var TwitterButton: UIButton!
     @IBOutlet weak var FaceboodButton: UIButton!
+    @IBOutlet weak var errorMes: UILabel!
     
+    //MARK: - Var
+    var handle: AuthStateDidChangeListenerHandle?
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        errorMes.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       if handle != nil {return}
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            self.dismiss(animated: true)
+            if user != nil{
+             //let gr
+            }
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+      //  Auth.auth().removeStateDidChangeListener(handle!)
     }
 
     //MARK: - IBAction
@@ -30,5 +49,36 @@ class ViewController: UIViewController {
     @IBAction func googleLogin(_ sender: UIButton) {
         print("google cliked")
     }
+    
+    
+    @IBAction func facebookLogin(_ sender: UIButton) {
+     /*
+        let loginManager = LoginManager()
+        
+        if let _ = AccessToken.current {
+         
+            loginManager.logOut()
+            
+        } else {
+            
+            loginManager.logIn(permissions: [], from: self) { [weak self] (result, error) in
+                guard error == nil else {
+                    // Error occurred
+                    print(error!.localizedDescription)
+                    return
+                }
+                // Check for cancel
+                guard let result = result, !result.isCancelled else {
+                    print("User cancelled login")
+                    return
+                }
+            
+                Profile.loadCurrentProfile { (profile, error) in
+                  
+                }
+            }
+        }*/
+    }
+    
 }
 

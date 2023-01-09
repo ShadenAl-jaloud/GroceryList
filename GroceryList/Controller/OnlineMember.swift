@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class OnlineMember: UITableViewController {
 
@@ -18,7 +19,7 @@ class OnlineMember: UITableViewController {
     //MARK: - Function
     
     @objc func signOut(){
-        
+        try? Auth.auth().signOut()
     }
     // MARK: - Table view data source
 
