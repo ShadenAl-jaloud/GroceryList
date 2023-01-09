@@ -21,6 +21,7 @@ class SignUp: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorMes.isHidden = true
+        errorMes.textColor = .red
     }
     
     
@@ -31,30 +32,30 @@ class SignUp: UIViewController {
             guard let useName = userNameField.text,
                   useName != ""
                 else{
-                errorMes.text = "⚠ Your name is empty"
                 errorMes.isHidden = false
+                errorMes.text = "⚠ Your name is empty"
                 return
             }
             guard emailField.isEmail(),
                   let email = emailField.text
                 else{
-                errorMes.text = "⚠ Invalid email"
                 errorMes.isHidden = false
+                errorMes.text = "⚠ Invalid email"
                 return
             }
             
             guard let password = passField.text,
                   password.count > 7
             else{
-                errorMes.text = "⚠ Password length most be 8 or more "
                 errorMes.isHidden = false
+                errorMes.text = "⚠ Password length most be 8 or more "
                 return
             }
             guard let confPass = confirmPassField.text,
                 password == confPass
             else{
-                errorMes.text = "⚠ Password NOT matched"
                 errorMes.isHidden = false
+                errorMes.text = "⚠ Password NOT matched"
                 return
             }
             Auth.auth().createUser(withEmail: email, password: password) { result, err in

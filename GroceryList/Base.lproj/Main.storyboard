@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginView" id="BYZ-38-t0r" customClass="ViewController" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,8 +190,11 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Login"/>
+                                <connections>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f8d-EL-4N7"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tp8-xq-RXL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tp8-xq-RXL">
                                 <rect key="frame" x="45" y="508" width="303" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="303" id="Hfh-mo-0db"/>
@@ -245,7 +248,9 @@
                         <outlet property="FaceboodButton" destination="qbv-UX-faX" id="WIM-nF-GRl"/>
                         <outlet property="GoogleButton" destination="RKR-q3-U4x" id="0Oh-h6-xUO"/>
                         <outlet property="TwitterButton" destination="Ima-4M-j9i" id="WaG-9r-JgL"/>
-                        <outlet property="errorMes" destination="Tp8-xq-RXL" id="4tK-B2-Vw3"/>
+                        <outlet property="emailField" destination="1qS-iC-s4z" id="mfW-Ea-YhU"/>
+                        <outlet property="errorMess" destination="Tp8-xq-RXL" id="Irs-2E-PQk"/>
+                        <outlet property="passField" destination="Yiq-yp-gAf" id="Cle-SI-zAL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -372,7 +377,7 @@
         <!--Navigation Controller-->
         <scene sceneID="UNV-mn-Sp1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zck-SZ-R9H" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="nav" automaticallyAdjustsScrollViewInsets="NO" id="Zck-SZ-R9H" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hgf-zL-Nzn">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -390,7 +395,7 @@
         <!--Grocery List-->
         <scene sceneID="BIv-75-ekW">
             <objects>
-                <tableViewController id="TJI-zt-EeS" customClass="GroceryList" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="groceryView" id="TJI-zt-EeS" customClass="GroceryList" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="NVl-Qe-dpS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,24 +478,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vs2-Gh-Ujr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1934" y="770"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Wz0-AE-ru5">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cnc-8P-unA" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BP7-wv-2bu">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="TJI-zt-EeS" kind="relationship" relationship="rootViewController" id="LiD-oO-KYs"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="auq-Rf-EVA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="87.786259541984734" y="769.71830985915494"/>
         </scene>
     </scenes>
     <resources>
