@@ -11,10 +11,12 @@ import FirebaseAuth
 class ViewController: UIViewController {
     
     //MARK: - Outlet
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var GoogleButton: UIButton!
     @IBOutlet weak var TwitterButton: UIButton!
     @IBOutlet weak var FaceboodButton: UIButton!
-    @IBOutlet weak var errorMes: UILabel!
+    @IBOutlet weak var errorMess: UILabel!
     
     //MARK: - Var
     var handle: AuthStateDidChangeListenerHandle?
@@ -22,15 +24,18 @@ class ViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        errorMes.isHidden = true
+        errorMess.isHidden = true
+        errorMess.textColor = .red
     }
     
     override func viewWillAppear(_ animated: Bool) {
        if handle != nil {return}
         handle = Auth.auth().addStateDidChangeListener { auth, user in
-            self.dismiss(animated: true)
+         
             if user != nil{
-             //let gr
+                let home = self.storyboard?.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
+                self.navigationItem.backBarButtonItem?.isHidden = true
+                self.navigationController?.pushViewController(home, animated: true)
             }
         }
     }
@@ -39,8 +44,22 @@ class ViewController: UIViewController {
     }
 
     //MARK: - IBAction
-    @IBAction func toSignUpScreen(_ sender: UIButton) {
+    @IBAction func login(_ sender: UIButton) {
+        guard let email = emailField.text,
+              email.isEmail(),
+              let password = passField.text,
+              password.count > 7
+        else{
+            errorMess.isHidden = false
+            errorMess.text = "⚠ Email or password is wrong"
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: password)
         
+    }
+    
+    
+    @IBAction func toSignUpScreen(_ sender: UIButton) {
         let signUp = storyboard?.instantiateViewController(withIdentifier: "signUp") as! SignUp
         navigationItem.backButtonTitle = "Login"
         self.navigationController?.pushViewController(signUp, animated: true)

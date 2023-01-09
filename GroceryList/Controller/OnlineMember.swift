@@ -9,17 +9,25 @@ import UIKit
 import FirebaseAuth
 
 class OnlineMember: UITableViewController {
+    
+    //MARK: - Var
 
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Family(Online)"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
     }
-
-    //MARK: - Function
     
+   
+    //MARK: - Function
+      
     @objc func signOut(){
         try? Auth.auth().signOut()
+        let loginController = storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
+        let login = UINavigationController(rootViewController: loginController)
+        login.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(login, animated: true)
     }
     // MARK: - Table view data source
 
