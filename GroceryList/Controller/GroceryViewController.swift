@@ -1,16 +1,17 @@
 //
-//  GroceryList.swift
+//  GroceryViewController.swift
 //  GroceryList
 //
-//  Created by admin on 1/8/23.
+//  Created by admin on 1/10/23.
 //
 
 import UIKit
 import Firebase
 
-class GroceryList: UITableViewController {
+class GroceryViewController: UIViewController {
 
-    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyState: UIStackView!
     //MARK: - Var
     var groceryList = [GroceryItem]()
     
@@ -25,11 +26,22 @@ class GroceryList: UITableViewController {
     
     //MARK: - Function
     func setUp(){
-        
-        tableView.rowHeight = 70
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 80
         title = "Groceries to But"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addItem))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.2.badge.gearshape.fill"), style: .plain, target: self, action: #selector(onlineMember))
+        
+        emptyState.isHidden = true
+        if groceryList.count == 0 {
+            emptyState.isHidden = false
+            tableView.isHidden = true
+        } else {
+            emptyState.isHidden = false
+            tableView.isHidden = true
+        }
+
     }
     
     private func fetch(){
@@ -37,6 +49,7 @@ class GroceryList: UITableViewController {
              self.groceryList = allItems
              self.tableView.reloadData()
          }
+        
         
     }
     
@@ -52,6 +65,8 @@ class GroceryList: UITableViewController {
             let item = alertController.textFields![0] as UITextField
             guard let newItem = item.text else { return }
             DBModel.shared.createNewItem(title: newItem)
+            self.emptyState.isHidden = true
+            self.tableView.isHidden = false
             self.tableView.reloadData()
            
             
@@ -66,13 +81,17 @@ class GroceryList: UITableViewController {
         navigationItem.backButtonTitle = "list"
         self.navigationController?.pushViewController(onlineMonitor, animated: true)
     }
-
-    // MARK: - Table view data source and delegat
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+}
+// MARK: - Table view data source and delegat
+extension GroceryViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groceryList.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as! GroceryCell
         cell.title.text = groceryList[indexPath.row].title
         cell.createdBy.text = groceryList[indexPath.row].createdBy
@@ -85,7 +104,7 @@ class GroceryList: UITableViewController {
     }
     
     //swip to delet or edit
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let selectedItem = groceryList[indexPath.row]
         //I need two action here one for delete and one for edit
@@ -119,7 +138,7 @@ class GroceryList: UITableViewController {
     }
     
     //check mark for completion
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = groceryList[indexPath.row]
         
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
@@ -133,52 +152,4 @@ class GroceryList: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-   
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
-
-}
+   }

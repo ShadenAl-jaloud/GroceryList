@@ -29,8 +29,8 @@ class SignUp: UIViewController {
     @IBAction func SignUpAction(_ sender: UIButton) {
         
             // signup error messages
-            guard let useName = userNameField.text,
-                  useName != ""
+            guard let userName = userNameField.text,
+                  userName != ""
                 else{
                 errorMes.isHidden = false
                 errorMes.text = "⚠ Your name is empty"
@@ -59,18 +59,21 @@ class SignUp: UIViewController {
                 return
             }
             Auth.auth().createUser(withEmail: email, password: password) { result, err in
+                
                 if  err != nil {
                     self.errorMes.isHidden = false
                     self.errorMes.text = "⚠ \(err!.localizedDescription)"
                 }
                 else{
-                  // here I need to save the user info in the database 
+                  // here I need to save the user info in the database
+                    guard let userId = result?.user.uid else { return }
+                    OnlineModel.shared.createNewUser(userID:userId , name: userName, email: email)
                 }
-                    }
-                    
+                
+                }
             // back to login page
             self.navigationController?.popViewController(animated: true)
                 
         }
     
-}
+    }

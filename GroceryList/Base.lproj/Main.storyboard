@@ -393,23 +393,23 @@
             <point key="canvasLocation" x="87.786259541984734" y="67.605633802816911"/>
         </scene>
         <!--Grocery List-->
-        <scene sceneID="BIv-75-ekW">
+        <scene sceneID="cng-RM-E6L">
             <objects>
-                <tableViewController storyboardIdentifier="groceryView" id="TJI-zt-EeS" customClass="GroceryList" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="NVl-Qe-dpS">
+                <tableViewController storyboardIdentifier="groceryView" id="7iu-zU-iRw" customClass="GroceryList" customModule="GroceryList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="52e-gc-7qe">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.88889551160000002" green="0.90758109090000005" blue="0.88615828750000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.9114391208" green="0.92697656149999996" blue="0.91184383629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" rowHeight="64" id="pbO-FN-JNV" customClass="GroceryCell" customModule="GroceryList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="64"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" id="CP4-bU-Da3" customClass="GroceryCell" customModule="GroceryList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pbO-FN-JNV" id="Jlw-9k-W9B">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="64"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CP4-bU-Da3" id="kCn-TC-sbj">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5U-ql-siT">
-                                            <rect key="frame" x="20" y="11" width="303" height="30"/>
+                                            <rect key="frame" x="22" y="13" width="301" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="VD8-rD-23l"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="303" id="u76-uk-XK8"/>
@@ -419,7 +419,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nu-yK-QtY">
-                                            <rect key="frame" x="20" y="43" width="251" height="19"/>
+                                            <rect key="frame" x="20" y="16.333333333333336" width="251" height="19.333333333333336"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="251" id="qbk-4o-MHc"/>
                                             </constraints>
@@ -429,31 +429,29 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="5Nu-yK-QtY" firstAttribute="top" secondItem="Q5U-ql-siT" secondAttribute="bottom" constant="2" id="Abc-U9-jBI"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Q5U-ql-siT" secondAttribute="trailing" constant="50" id="G6C-GL-lnz"/>
-                                        <constraint firstAttribute="trailing" secondItem="5Nu-yK-QtY" secondAttribute="trailing" constant="122" id="MfK-55-K3W"/>
-                                        <constraint firstAttribute="bottom" secondItem="5Nu-yK-QtY" secondAttribute="bottom" constant="2" id="YF1-Wi-COi"/>
-                                        <constraint firstItem="5Nu-yK-QtY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jlw-9k-W9B" secondAttribute="leading" constant="20" symbolic="YES" id="o0F-Qq-BfI"/>
-                                        <constraint firstItem="Q5U-ql-siT" firstAttribute="top" secondItem="Jlw-9k-W9B" secondAttribute="topMargin" id="rQX-kI-xed"/>
-                                        <constraint firstItem="Q5U-ql-siT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jlw-9k-W9B" secondAttribute="leadingMargin" id="wmD-Nb-r09"/>
+                                        <constraint firstItem="5Nu-yK-QtY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kCn-TC-sbj" secondAttribute="leading" constant="10" id="Cbt-wy-sOh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Q5U-ql-siT" secondAttribute="trailing" constant="50" id="Go9-ZV-Jhm"/>
+                                        <constraint firstItem="Q5U-ql-siT" firstAttribute="top" secondItem="kCn-TC-sbj" secondAttribute="topMargin" constant="2" id="KYl-eT-GKh"/>
+                                        <constraint firstAttribute="trailing" secondItem="5Nu-yK-QtY" secondAttribute="trailing" constant="122" id="aEk-8S-zyS"/>
+                                        <constraint firstItem="Q5U-ql-siT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kCn-TC-sbj" secondAttribute="leadingMargin" constant="2" id="df1-Ys-Gun"/>
+                                        <constraint firstAttribute="bottom" secondItem="5Nu-yK-QtY" secondAttribute="bottom" constant="8" id="f0n-9j-qad"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="createdBy" destination="5Nu-yK-QtY" id="Juy-II-t6t"/>
-                                    <outlet property="title" destination="Q5U-ql-siT" id="D1K-Q6-GWt"/>
+                                    <outlet property="createdBy" destination="5Nu-yK-QtY" id="K5S-Yk-AcE"/>
+                                    <outlet property="title" destination="Q5U-ql-siT" id="Hnk-vE-e8A"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="TJI-zt-EeS" id="NeS-f3-68u"/>
-                            <outlet property="delegate" destination="TJI-zt-EeS" id="K24-wa-Qvy"/>
+                            <outlet property="dataSource" destination="7iu-zU-iRw" id="KU4-c4-aNO"/>
+                            <outlet property="delegate" destination="7iu-zU-iRw" id="Y3O-kz-hU3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="A7s-Uo-JcB"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3zo-Xo-K51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nmn-0f-NhB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014.5038167938931" y="769.71830985915494"/>
+            <point key="canvasLocation" x="1015" y="770"/>
         </scene>
         <!--Online Member-->
         <scene sceneID="PUG-A3-HE2">

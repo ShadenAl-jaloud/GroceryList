@@ -7,15 +7,35 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    var handle: AuthStateDidChangeListenerHandle?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+         /*handle = Auth.auth().addStateDidChangeListener { auth, user in
+             
+             let SB = UIStoryboard(name: "Main", bundle: nil)
+
+             if user != nil{
+                 guard let userId = user?.uid else { return }
+                 OnlineModel.shared.updateState(id: userId, state: "online")
+
+                 let home = SB.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
+                 let homeView = UINavigationController(rootViewController: home)
+                 homeView.modalPresentationStyle = .fullScreen
+                 self.window?.rootViewController = homeView
+                 
+             } else {
+                 let login = SB.instantiateViewController(withIdentifier: "loginView") as! ViewController
+             }
+         }*/
         return true
     }
 

@@ -11,7 +11,8 @@ import FirebaseAuth
 class OnlineMember: UITableViewController {
     
     //MARK: - Var
-
+    var handle: AuthStateDidChangeListenerHandle?
+    
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,14 @@ class OnlineMember: UITableViewController {
     //MARK: - Function
       
     @objc func signOut(){
-        try? Auth.auth().signOut()
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            guard let userId = user?.uid else { return }
+            OnlineModel.shared.updateState(id: userId, state: "offline")
+            OnlineModel.currenUser = nil
+            try? Auth.auth().signOut()
+        }
+        
+
         let loginController = storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
         let login = UINavigationController(rootViewController: loginController)
         login.modalPresentationStyle = .fullScreen
