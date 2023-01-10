@@ -438,6 +438,10 @@
                                         <constraint firstItem="Q5U-ql-siT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jlw-9k-W9B" secondAttribute="leadingMargin" id="wmD-Nb-r09"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="createdBy" destination="5Nu-yK-QtY" id="Juy-II-t6t"/>
+                                    <outlet property="title" destination="Q5U-ql-siT" id="D1K-Q6-GWt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
