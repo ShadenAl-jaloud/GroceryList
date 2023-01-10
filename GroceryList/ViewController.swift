@@ -29,19 +29,27 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       if handle != nil {return}
+      if handle != nil {return}
         handle = Auth.auth().addStateDidChangeListener { auth, user in
-         
+
             if user != nil{
+               /* OnlineModel.currentUserInfo(user!.uid) { userInfo in
+                    OnlineModel.currenUser = userInfo
+                   print(userInfo)
+                    
+                }*/
+            
+                OnlineModel.currenUser = user?.email
+                guard let userId = user?.uid else { return }
+                OnlineModel.shared.updateState(id: userId, state: "online")
+
                 let home = self.storyboard?.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
                 self.navigationItem.backBarButtonItem?.isHidden = true
                 self.navigationController?.pushViewController(home, animated: true)
             }
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
-      //  Auth.auth().removeStateDidChangeListener(handle!)
-    }
+
 
     //MARK: - IBAction
     @IBAction func login(_ sender: UIButton) {
@@ -55,7 +63,7 @@ class ViewController: UIViewController {
             return
         }
         Auth.auth().signIn(withEmail: email, password: password)
-        
+     
     }
     
     

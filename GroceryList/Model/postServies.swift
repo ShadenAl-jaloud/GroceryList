@@ -15,18 +15,21 @@ struct GroceryItem{
     var createdBy: String
     
     init(keyId: String, dictionary: [String: Any]){
+        
         self.title = dictionary["title"] as? String ?? ""
         self.id = dictionary["id"] as? String ?? ""
         self.complete = dictionary["complete"] as? Bool ?? false
         self.createdBy = dictionary["createdBy"] as? String ?? ""
-        
     }
 }
 
-struct PostService{
-    static let shared = PostService()
+struct DBModel{
+    
+    static let shared = DBModel()
     let databaseREF =  Database.database().reference()
     
+    //MARK: - function
+
     //fetch all item from DB
     func fetchAll(completion: @escaping([GroceryItem]) -> Void){
         
@@ -39,6 +42,7 @@ struct PostService{
             }
         }
     }
+    
     //fetch single item
     func fetchOneItem(id: String, completion: @escaping(GroceryItem) -> Void){
         
@@ -54,9 +58,13 @@ struct PostService{
     
     //create new item in DB
     func createNewItem(title: String){
+        
+        guard let creator = OnlineModel.currenUser else {return}
+        
         let values: [String: Any] = ["title": title,
                                     "complete": false,
-                                    "createdBy": ""]
+                                     "createdBy": creator]
+        
         let id = databaseREF.child("items").childByAutoId()
         id.updateChildValues(values)
         id.updateChildValues(values) { (error, ref) in
