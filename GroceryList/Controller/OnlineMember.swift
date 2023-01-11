@@ -42,21 +42,21 @@ class OnlineMember: UITableViewController {
             }
         }
         self.tableView.reloadData()
-        
     }
+    
     @objc func signOut(){
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            guard let userId = user?.uid else { return }
-            OnlineModel.shared.updateState(id: userId, state: "offline")
-            OnlineModel.currenUser = nil
-            try? Auth.auth().signOut()
-        }
         
-
-        let loginController = storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
-        let login = UINavigationController(rootViewController: loginController)
-        login.modalPresentationStyle = .fullScreen
-        self.navigationController?.present(login, animated: true)
+            handle = Auth.auth().addStateDidChangeListener { auth, user in
+                guard let userId = user?.uid else { return }
+                OnlineModel.shared.updateState(id: userId, state: "offline")
+                OnlineModel.currenUser = nil
+                try? Auth.auth().signOut()
+            }
+            if let loginController = storyboard?.instantiateViewController(withIdentifier: "loginView") as? ViewController {
+                self.navigationController?.pushViewController(loginController, animated: true)
+                loginController.modalPresentationStyle = .fullScreen
+            }
+     
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

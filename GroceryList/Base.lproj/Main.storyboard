@@ -337,7 +337,7 @@
                                     <action selector="SignUpAction:" destination="WY6-90-etW" eventType="touchUpInside" id="xfi-YI-7TK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0l7-vF-s9n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0l7-vF-s9n">
                                 <rect key="frame" x="36" y="597" width="321" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="f1X-FI-bVM"/>

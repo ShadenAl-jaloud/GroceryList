@@ -32,20 +32,16 @@ struct OnlineModel{
     static func currentUserInfo(_ id: String, completion: @escaping ((_ userInfo: Online?) ->())) {
         
         Database.database().reference().child("onlin/\(id)").observe(.value, with: { snapshot  in
-            
+
             var userProfile: Online?
             if let dic = snapshot.value as? [String: String]{
                 userProfile = Online(keyId: id, dictionary: dic)
-                
             }
-            
             completion(userProfile)
         })
-        
     }
     
     func fetchAllUsersInfo(completion: @escaping([Online]) -> Void){
-        
         var allUsers = [Online]()
         
         DBREF.child("online").observe(.childAdded){ (snapshot) in
@@ -54,36 +50,16 @@ struct OnlineModel{
                 completion(allUsers)
             })
         }
-        
     }
+    
     func fetchSingleUserInfo(uuid: String, completion: @escaping(Online) -> Void){
         let dataRF = Database.database().reference()
-       // let onlinere = dataRF.child("online").child(uuid)
     
         dataRF.child("online/\(uuid)").observe(.value, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             let userInfo = Online(keyId: uuid, dictionary: dictionary)
             completion(userInfo)
         })
-        
-    }
-    
-    func j(uuid: String) -> Online{
-        var userInfo = Online(keyId: uuid, dictionary: [:])
-        let dataRE = Database.database().reference().child("online").child(uuid)
-      //  let allUsers = dataRE.child("online").child(id)
-       
-        dataRE.observe(.value) { (snapshot) in
-            guard let dictionary = snapshot.value as? [String: Any] else {
-                print("user info not found")
-                return
-            }
-            userInfo = Online(keyId: uuid, dictionary: dictionary)
-            print(dictionary)
-        }
-        
-        print("user info == \(userInfo)")
-        return userInfo
     }
     
     //create new user in DB
@@ -106,11 +82,6 @@ struct OnlineModel{
             value = ["state": state]
         
         DBREF.child("online").child(id).updateChildValues(value)
-    }
-    //fetch and monitoring online users
-    func onlineUsers(){
-        
-        
     }
     
 }
