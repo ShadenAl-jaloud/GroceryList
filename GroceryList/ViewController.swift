@@ -38,8 +38,7 @@ class ViewController: UIViewController {
                    print(userInfo)
                     
                 }*/
-            
-                OnlineModel.currenUser = user?.email
+                OnlineModel.currenUser = user?.uid
                 guard let userId = user?.uid else { return }
                 OnlineModel.shared.updateState(id: userId, state: "online")
 

@@ -13,7 +13,7 @@ class GroceryList: UITableViewController {
     
     //MARK: - Var
     var groceryList = [GroceryItem]()
-    
+    var currentUser = [Online]()
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,7 @@ class GroceryList: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         fetch()
+        fetchCurrentUser()
     }
     
     //MARK: - Function
@@ -39,7 +40,22 @@ class GroceryList: UITableViewController {
          }
         
     }
+    func fetchCurrentUser(){
+        OnlineModel.shared.fetchAllUsersInfo { users in
+            self.monitorOnline(user: users)
+        }
+    }
     
+    func monitorOnline(user: [Online]){
+        currentUser.removeAll()
+        guard let userId = OnlineModel.currenUser else { return }
+        for onlin in user {
+            if onlin.id == userId{
+                self.currentUser.append(onlin)
+            }
+        }
+        
+    }
     @objc func addItem(){
         let alertController = UIAlertController(title: "Add Item", message: "write new grocery item", preferredStyle: .alert)
         
@@ -51,7 +67,7 @@ class GroceryList: UITableViewController {
             //save new item
             let item = alertController.textFields![0] as UITextField
             guard let newItem = item.text else { return }
-            DBModel.shared.createNewItem(title: newItem)
+            DBModel.shared.createNewItem(title: newItem, creator: self.currentUser[0].name)
             self.tableView.reloadData()
            
             
