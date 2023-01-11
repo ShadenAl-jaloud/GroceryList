@@ -10,10 +10,11 @@ import Firebase
 
 class GroceryList: UITableViewController {
 
-    
+
     //MARK: - Var
     var groceryList = [GroceryItem]()
     var currentUser = [Online]()
+    
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,19 @@ class GroceryList: UITableViewController {
     }
     
     private func fetch(){
-         DBModel.shared.fetchAll { (allItems) in
-             self.groceryList = allItems
-             self.tableView.reloadData()
-         }
-        
+        DBModel.shared.check { FirbaseJSON in
+            if FirbaseJSON.count == 2 {
+                DBModel.shared.fetchAll { (allItems) in
+                     self.groceryList = allItems
+                     self.tableView.reloadData()
+                 }
+            } else {
+                self.groceryList = [GroceryItem]()
+                self.tableView.reloadData()
+            }
+        }
     }
+  
     func fetchCurrentUser(){
         OnlineModel.shared.fetchAllUsersInfo { users in
             self.monitorOnline(user: users)
@@ -54,8 +62,8 @@ class GroceryList: UITableViewController {
                 self.currentUser.append(onlin)
             }
         }
-        
     }
+    
     @objc func addItem(){
         let alertController = UIAlertController(title: "Add Item", message: "write new grocery item", preferredStyle: .alert)
         
@@ -106,7 +114,8 @@ class GroceryList: UITableViewController {
         let selectedItem = groceryList[indexPath.row]
         //I need two action here one for delete and one for edit
         let deletAction = UIContextualAction(style: .destructive, title: "delete") { action, view, completionHandler in
-            DBModel.shared.deletItem(id: selectedItem.id)
+            
+            DBModel.shared.deletItem(itemId: selectedItem.id)
             self.fetch()
         }
         
@@ -149,52 +158,5 @@ class GroceryList: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-   
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
 
 }

@@ -26,29 +26,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         errorMess.isHidden = true
         errorMess.textColor = .red
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
       if handle != nil {return}
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            handle = Auth.auth().addStateDidChangeListener { auth, user in
 
-            if user != nil{
-               /* OnlineModel.currentUserInfo(user!.uid) { userInfo in
-                    OnlineModel.currenUser = userInfo
-                   print(userInfo)
-                    
-                }*/
-                OnlineModel.currenUser = user?.uid
-                guard let userId = user?.uid else { return }
-                OnlineModel.shared.updateState(id: userId, state: "online")
+                if user != nil{
+                    OnlineModel.currenUser = user?.uid
+                    guard let userId = user?.uid else { return }
+                    OnlineModel.shared.updateState(id: userId, state: "online")
 
-                let home = self.storyboard?.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
-                self.navigationItem.backBarButtonItem?.isHidden = true
-                self.navigationController?.pushViewController(home, animated: true)
+                    let home = self.storyboard?.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
+                    self.navigationItem.backBarButtonItem?.isHidden = true
+                    self.navigationController?.pushViewController(home, animated: true)
+                }
             }
-        }
+            return
+        
     }
-
 
     //MARK: - IBAction
     @IBAction func login(_ sender: UIButton) {
@@ -61,8 +58,18 @@ class ViewController: UIViewController {
             errorMess.text = "⚠ Email or password is wrong"
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password)
-     
+        Auth.auth().signIn(withEmail: email, password: password) { res, err in
+            if err == nil {
+                self.handle = Auth.auth().addStateDidChangeListener { auth, user in
+                    guard let userId = user?.uid else { return }
+                    OnlineModel.shared.updateState(id: userId, state: "online")
+                }
+                let story = UIStoryboard(name: "Main", bundle: nil)
+                let home = story.instantiateViewController(withIdentifier: "groceryView") as! GroceryList
+                self.navigationController?.pushViewController(home, animated: true)
+            }
+        }
+         
     }
     
     
@@ -78,32 +85,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func facebookLogin(_ sender: UIButton) {
-     /*
-        let loginManager = LoginManager()
-        
-        if let _ = AccessToken.current {
-         
-            loginManager.logOut()
-            
-        } else {
-            
-            loginManager.logIn(permissions: [], from: self) { [weak self] (result, error) in
-                guard error == nil else {
-                    // Error occurred
-                    print(error!.localizedDescription)
-                    return
-                }
-                // Check for cancel
-                guard let result = result, !result.isCancelled else {
-                    print("User cancelled login")
-                    return
-                }
-            
-                Profile.loadCurrentProfile { (profile, error) in
-                  
-                }
-            }
-        }*/
+        print("facebook cliked")
     }
     
 }

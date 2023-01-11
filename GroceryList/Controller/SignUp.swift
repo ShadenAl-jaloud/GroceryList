@@ -17,6 +17,7 @@ class SignUp: UIViewController {
     @IBOutlet weak var confirmPassField: UITextField!
     @IBOutlet weak var errorMes: UILabel!
     
+
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +59,22 @@ class SignUp: UIViewController {
                 errorMes.text = "⚠ Password NOT matched"
                 return
             }
-            Auth.auth().createUser(withEmail: email, password: password) { result, err in
-                
-                if  err != nil {
-                    self.errorMes.isHidden = false
-                    self.errorMes.text = "⚠ \(err!.localizedDescription)"
-                }
-                else{
-                  // here I need to save the user info in the database
-                    guard let userId = result?.user.uid else { return }
-                    OnlineModel.shared.createNewUser(userID:userId , name: userName, email: email)
-                }
-                
-                }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { result, err in
+            
+            if  err != nil {
+                self.errorMes.isHidden = false
+                self.errorMes.text = "⚠ \(err!.localizedDescription)"
+            }
+            else{
+                // here I need to save the user info in the database
+                guard let userId = result?.user.uid else { return }
+                OnlineModel.shared.createNewUser(userID:userId , name: userName, email: email)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
             // back to login page
             self.navigationController?.popViewController(animated: true)
-                
+        
         }
-    
     }
