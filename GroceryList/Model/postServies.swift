@@ -27,7 +27,7 @@ struct DBModel{
     
     static let shared = DBModel()
     let databaseREF =  Database.database().reference()
-    
+
     //MARK: - function
 
     //fetch all item from DB
@@ -54,12 +54,11 @@ struct DBModel{
         }
         
     }
-    
-    
+   
     //create new item in DB
-    func createNewItem(title: String){
-        
-        guard let creator = OnlineModel.currenUser else {return}
+    func createNewItem(title: String, creator: String){
+       //  guard let creatorId = OnlineModel.currenUser else { return }
+
         
         let values: [String: Any] = ["title": title,
                                     "complete": false,
