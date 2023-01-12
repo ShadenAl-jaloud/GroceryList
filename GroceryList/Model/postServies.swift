@@ -28,6 +28,7 @@ struct GroceryItem{
 struct DBModel{
     
     static let shared = DBModel()
+    static var current = String()
     let databaseREF =  Database.database().reference()
 
     //MARK: - function

@@ -69,6 +69,7 @@ class SignUp: UIViewController {
             else{
                 // here I need to save the user info in the database
                 guard let userId = result?.user.uid else { return }
+                DBModel.current = result?.user.email ?? ""
                 OnlineModel.shared.createNewUser(userID:userId , name: userName, email: email)
                 self.dismiss(animated: true, completion: nil)
             }
