@@ -82,12 +82,13 @@ struct DBModel{
     }
     
     //edit exusting item
-    func editItem(id: String, isComplete: Bool = false, title: String){
+    func editItem(id: String, isComplete: Bool = false, title: String, creator: String = ""){
         let value: [String: Any]
         
         if title != ""{
             value = ["title": title,
-                    "complete": isComplete]
+                    "complete": isComplete,
+                     "createdBy": creator]
         } else {
             value = ["complete": isComplete]
         }
