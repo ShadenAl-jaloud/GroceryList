@@ -22,13 +22,16 @@ class GroceryList: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         fetch()
-        fetchCurrentUser()
     }
     
     //MARK: - Function
     func setUp(){
         
         tableView.rowHeight = 70
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
+        tableView.refreshControl = refresh
+        
         title = "Groceries to But"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addItem))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.2.badge.gearshape.fill"), style: .plain, target: self, action: #selector(onlineMember))
@@ -46,6 +49,7 @@ class GroceryList: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+        fetchCurrentUser()
     }
   
     func fetchCurrentUser(){
@@ -64,6 +68,7 @@ class GroceryList: UITableViewController {
         }
     }
     
+    //MARK: - Selector
     @objc func addItem(){
         let alertController = UIAlertController(title: "Add Item", message: "write new grocery item", preferredStyle: .alert)
         
@@ -90,7 +95,18 @@ class GroceryList: UITableViewController {
         navigationItem.backButtonTitle = "list"
         self.navigationController?.pushViewController(onlineMonitor, animated: true)
     }
-
+    
+    @objc func refreshHandler(){
+        self.tableView.refreshControl?.beginRefreshing()
+        
+        if let isRefreshing = self.tableView.refreshControl?.isRefreshing, isRefreshing{
+            DispatchQueue.main.async { [self] in
+                fetch()
+                tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     // MARK: - Table view data source and delegat
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groceryList.count
@@ -132,7 +148,8 @@ class GroceryList: UITableViewController {
                 //save change
                 let item = alertController.textFields![0] as UITextField
                 guard let updatedItem = item.text else { return }
-                DBModel.shared.editItem(id: selectedItem.id, title: updatedItem)
+                let editedBy = "\(self.currentUser[0].name)  'edited'"
+                DBModel.shared.editItem(id: selectedItem.id, title: updatedItem, creator: editedBy )
                 self.fetch()
             }))
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
