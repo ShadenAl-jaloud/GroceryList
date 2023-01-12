@@ -49,24 +49,8 @@ class GroceryList: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        fetchCurrentUser()
     }
   
-    func fetchCurrentUser(){
-        OnlineModel.shared.fetchAllUsersInfo { users in
-            self.monitorOnline(user: users)
-        }
-    }
-    
-    func monitorOnline(user: [Online]){
-        currentUser.removeAll()
-        guard let userId = OnlineModel.currenUser else { return }
-        for onlin in user {
-            if onlin.id == userId{
-                self.currentUser.append(onlin)
-            }
-        }
-    }
     
     //MARK: - Selector
     @objc func addItem(){
@@ -80,7 +64,7 @@ class GroceryList: UITableViewController {
             //save new item
             let item = alertController.textFields![0] as UITextField
             guard let newItem = item.text else { return }
-            DBModel.shared.createNewItem(title: newItem, creator: self.currentUser[0].name)
+            DBModel.shared.createNewItem(title: newItem, creator: DBModel.current)
             self.tableView.reloadData()
            
             
@@ -148,7 +132,7 @@ class GroceryList: UITableViewController {
                 //save change
                 let item = alertController.textFields![0] as UITextField
                 guard let updatedItem = item.text else { return }
-                let editedBy = "\(self.currentUser[0].name)  'edited'"
+                let editedBy = "\(DBModel.current)  'edited'"
                 DBModel.shared.editItem(id: selectedItem.id, title: updatedItem, creator: editedBy )
                 self.fetch()
             }))

@@ -35,6 +35,7 @@ class ViewController: UIViewController {
 
                 if user != nil{
                     OnlineModel.currenUser = user?.uid
+                    DBModel.current = user?.email ?? ""
                     guard let userId = user?.uid else { return }
                     OnlineModel.shared.updateState(id: userId, state: "online")
 
@@ -62,6 +63,7 @@ class ViewController: UIViewController {
             if err == nil {
                 self.handle = Auth.auth().addStateDidChangeListener { auth, user in
                     guard let userId = user?.uid else { return }
+                    DBModel.current = res?.user.email ?? ""
                     OnlineModel.shared.updateState(id: userId, state: "online")
                 }
                 let story = UIStoryboard(name: "Main", bundle: nil)

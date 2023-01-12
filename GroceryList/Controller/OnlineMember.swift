@@ -17,9 +17,7 @@ class OnlineMember: UITableViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Family(Online)"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
-        tableView.rowHeight = 60
+        setUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +26,16 @@ class OnlineMember: UITableViewController {
     
    
     //MARK: - Function
+    func setUp(){
+        tableView.rowHeight = 60
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
+        tableView.refreshControl = refresh
+        title = "Family(Online)"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
+        
+    }
+    
     func fetch(){
         OnlineModel.shared.fetchAllUsersInfo { users in
             self.monitorOnline(user: users)
@@ -58,6 +66,18 @@ class OnlineMember: UITableViewController {
             }
      
     }
+    
+    @objc func refreshHandler(){
+        self.tableView.refreshControl?.beginRefreshing()
+        
+        if let isRefreshing = self.tableView.refreshControl?.isRefreshing, isRefreshing{
+            DispatchQueue.main.async { [self] in
+                fetch()
+                tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         onlineUser.count
